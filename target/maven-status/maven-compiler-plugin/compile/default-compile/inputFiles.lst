@@ -1,0 +1,8 @@
+/Users/anatorres/Desktop/examen/src/main/java/ana/torres/martinez/app/AppApplication.java
+/Users/anatorres/Desktop/examen/src/main/java/ana/torres/martinez/app/config/OpenApiConfig.java
+/Users/anatorres/Desktop/examen/src/main/java/ana/torres/martinez/app/model/Room.java
+/Users/anatorres/Desktop/examen/src/main/java/ana/torres/martinez/app/model/RoomRequest.java
+/Users/anatorres/Desktop/examen/src/main/java/ana/torres/martinez/app/repository/RoomRepository.java
+/Users/anatorres/Desktop/examen/src/main/java/ana/torres/martinez/app/rest/RoomRest.java
+/Users/anatorres/Desktop/examen/src/main/java/ana/torres/martinez/app/service/RoomService.java
+/Users/anatorres/Desktop/examen/src/main/java/ana/torres/martinez/app/service/impl/RoomServiceImpl.java

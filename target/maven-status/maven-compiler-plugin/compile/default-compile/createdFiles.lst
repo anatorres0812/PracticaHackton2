@@ -1,0 +1,8 @@
+ana/torres/martinez/app/model/Room.class
+ana/torres/martinez/app/service/RoomService.class
+ana/torres/martinez/app/config/OpenApiConfig.class
+ana/torres/martinez/app/rest/RoomRest.class
+ana/torres/martinez/app/AppApplication.class
+ana/torres/martinez/app/service/impl/RoomServiceImpl.class
+ana/torres/martinez/app/model/RoomRequest.class
+ana/torres/martinez/app/repository/RoomRepository.class

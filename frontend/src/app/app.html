@@ -1,0 +1,469 @@
+
+<div class="estate-app">
+
+  <!-- TOP NAVIGATION -->
+  <header class="topbar">
+    <a class="brand" (click)="navigate('dashboard')">
+      <span class="brand-mark">CN</span>
+      <span class="brand-name">
+        <strong>CASA NOBLE</strong>
+        <small>HACIENDA & COUNTRY HOUSE</small>
+      </span>
+    </a>
+
+    <nav class="navigation">
+      <button [class.active]="activeView === 'dashboard'"
+              (click)="navigate('dashboard')">Overview</button>
+      <button [class.active]="activeView === 'rooms'"
+              (click)="navigate('rooms')">Our rooms</button>
+      <button [class.active]="activeView === 'trash'"
+              (click)="navigate('trash')">Recycle bin</button>
+      <button [class.active]="activeView === 'audit'"
+              (click)="navigate('audit')">Activity</button>
+    </nav>
+
+    <div class="nav-right">
+      <span class="online"><i></i> Online</span>
+      <div class="avatar">CN</div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- DASHBOARD -->
+    @if (activeView === 'dashboard') {
+
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="hero-eyebrow">
+            <span class="eyebrow-line"></span>
+            A PRIVATE COUNTRYSIDE ESCAPE
+          </div>
+
+          <h1>Where nature<br>meets <em>elegance.</em></h1>
+
+          <p>
+            Welcome to Casa Noble, a peaceful countryside retreat
+            where timeless architecture and thoughtful hospitality
+            come together.
+          </p>
+
+          <div class="hero-actions">
+            <button class="button-dark" (click)="navigate('rooms')">
+              Discover our rooms <span>↗</span>
+            </button>
+            <span class="hero-date">{{ currentDate }}</span>
+          </div>
+
+          <div class="hero-note">
+            <span class="note-icon">✳</span>
+            A slower pace. A finer experience.
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-photo">
+            <img
+              src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?w=1600"
+              alt="Rustic countryside hacienda surrounded by nature">
+
+            <div class="photo-shade"></div>
+
+            <div class="photo-frame"></div>
+
+            <div class="photo-caption">
+              <span>THE CASA NOBLE EXPERIENCE</span>
+              <h2>Escape to the<br>beauty of nature.</h2>
+            </div>
+
+            <div class="photo-counter">01 <span>/</span> 04</div>
+          </div>
+
+          <div class="floating-note">
+            <span class="floating-leaf">✳</span>
+            <div>
+              <small>YOUR COUNTRYSIDE RETREAT</small>
+              <strong>Peace, comfort & nature</strong>
+            </div>
+          </div>
+
+          <div class="floating-seal">
+            <span>EST.</span>
+            <strong>CN</strong>
+            <span>2026</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- WELCOME STRIP -->
+      <section class="intro-strip">
+        <span>✳</span>
+        <p>
+          MORE THAN A STAY — AN EXPERIENCE ROOTED IN NATURE,
+          TRADITION AND COMFORT.
+        </p>
+        <span>✳</span>
+      </section>
+
+      <!-- STATISTICS -->
+      <section class="overview-section">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">THE ESTATE AT A GLANCE</span>
+            <h2>A little look <em>inside.</em></h2>
+            <p>Everything you need to know about your property.</p>
+          </div>
+
+          <button class="text-link" (click)="navigate('audit')">
+            View activity <span>↗</span>
+          </button>
+        </div>
+
+        <div class="stats-grid">
+
+          <article class="stat-card card-one">
+            <div class="stat-icon">⌂</div>
+            <span class="stat-label">TOTAL ROOMS</span>
+            <strong>{{ activeRooms.length }}</strong>
+            <small>Registered spaces</small>
+            <span class="card-index">01</span>
+          </article>
+
+          <article class="stat-card card-two">
+            <div class="stat-icon">✳</div>
+            <span class="stat-label">AVAILABLE</span>
+            <strong>{{ cleanRooms }}</strong>
+            <small>Ready for guests</small>
+            <span class="card-index">02</span>
+          </article>
+
+          <article class="stat-card card-three">
+            <div class="stat-icon">♧</div>
+            <span class="stat-label">OCCUPIED</span>
+            <strong>{{ occupiedRooms }}</strong>
+            <small>Currently occupied</small>
+            <span class="card-index">03</span>
+          </article>
+
+          <article class="stat-card card-four">
+            <div class="stat-icon">⚒</div>
+            <span class="stat-label">MAINTENANCE</span>
+            <strong>{{ maintenanceRooms }}</strong>
+            <small>Requires attention</small>
+            <span class="card-index">04</span>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- OCCUPANCY -->
+      <section class="occupancy-panel">
+        <div class="occupancy-text">
+          <span class="section-kicker">PROPERTY PERFORMANCE</span>
+          <h2>Keeping everything<br><em>in harmony.</em></h2>
+          <p>
+            Monitor the availability and current condition
+            of your countryside rooms.
+          </p>
+        </div>
+
+        <div class="occupancy-visual">
+          <div class="progress-ring"
+               [style.--progress]="occupancyRate + '%'">
+            <div class="ring-center">
+              <strong>{{ occupancyRate }}%</strong>
+              <span>OCCUPIED</span>
+            </div>
+          </div>
+
+          <div class="legend">
+            <div><i class="legend-clean"></i> Available <b>{{ cleanRooms }}</b></div>
+            <div><i class="legend-occupied"></i> Occupied <b>{{ occupiedRooms }}</b></div>
+            <div><i class="legend-maintenance"></i> Maintenance <b>{{ maintenanceRooms }}</b></div>
+          </div>
+        </div>
+
+        <div class="panel-watermark">CN</div>
+      </section>
+
+      <!-- FEATURED ROOMS -->
+      <section class="featured-section">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">A PLACE TO UNWIND</span>
+            <h2>Spaces made for <em>living.</em></h2>
+            <p>Discover the comfort of every corner of Casa Noble.</p>
+          </div>
+
+          <button class="text-link" (click)="navigate('rooms')">
+            Explore all rooms <span>↗</span>
+          </button>
+        </div>
+
+        <div class="rooms-grid">
+          @for (room of activeRooms.slice(0, 3); track room.roomId) {
+            <article class="room-card">
+              <div class="room-photo">
+                <img [src]="room.image" [alt]="'Room ' + room.number">
+
+                <span class="room-status"
+                      [class]="statusClass(room.cleaningStatus)">
+                  {{ room.cleaningStatus }}
+                </span>
+
+                <span class="room-photo-number">ROOM {{ room.number }}</span>
+                <div class="room-image-hover"></div>
+              </div>
+
+              <div class="room-content">
+                <span class="room-type">{{ room.type }} COLLECTION</span>
+
+                <div class="room-title-row">
+                  <h3>Room {{ room.number }}</h3>
+                  <span class="room-price">S/ {{ room.pricePerNight }}<small> / night</small></span>
+                </div>
+
+                <div class="room-bottom">
+                  <span>♙ {{ room.capacity }} guests</span>
+                  <button (click)="navigate('rooms')">Discover ↗</button>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+
+      <!-- COUNTRY EXPERIENCE -->
+      <section class="country-banner">
+        <div class="country-image">
+          <img src="https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=1500"
+               alt="Countryside estate">
+        </div>
+        <div class="country-content">
+          <span class="section-kicker">THE ART OF COUNTRY LIVING</span>
+          <h2>Rooted in nature.<br><em>Designed for comfort.</em></h2>
+          <p>
+            Every space tells a story. Every detail is part of
+            an experience worth remembering.
+          </p>
+          <button class="button-light" (click)="navigate('rooms')">
+            Explore the estate ↗
+          </button>
+        </div>
+      </section>
+    }
+
+    <!-- ROOMS PAGE -->
+    @if (activeView === 'rooms') {
+      <section class="page-hero">
+        <span class="section-kicker">THE CASA NOBLE COLLECTION</span>
+        <h1>Our rooms <em>& suites.</em></h1>
+        <p>
+          Thoughtfully designed spaces inspired by the
+          warmth and beauty of country living.
+        </p>
+        <div class="page-decoration">CN</div>
+      </section>
+
+      <section class="management-toolbar">
+        <div>
+          <span class="section-kicker">ROOM MANAGEMENT</span>
+          <h2>Your collection <span>({{ filteredRooms.length }})</span></h2>
+        </div>
+
+        <button class="button-dark" (click)="openCreate()">
+          + Add a room
+        </button>
+      </section>
+
+      <section class="filters">
+        <div class="search-box">
+          <span>⌕</span>
+          <input type="search"
+                 placeholder="Search room number or type..."
+                 [(ngModel)]="searchTerm">
+        </div>
+
+        <select [(ngModel)]="selectedStatus">
+          <option>All</option>
+          <option>Clean</option>
+          <option>Occupied</option>
+          <option>Maintenance</option>
+        </select>
+      </section>
+
+      <section class="rooms-grid management-grid">
+        @for (room of filteredRooms; track room.roomId) {
+          <article class="room-card">
+            <div class="room-photo">
+              <img [src]="room.image" [alt]="'Room ' + room.number">
+
+              <span class="room-status"
+                    [class]="statusClass(room.cleaningStatus)">
+                {{ room.cleaningStatus }}
+              </span>
+
+              <span class="room-photo-number">ROOM {{ room.number }}</span>
+              <div class="room-image-hover"></div>
+            </div>
+
+            <div class="room-content">
+              <span class="room-type">{{ room.type }} COLLECTION</span>
+
+              <div class="room-title-row">
+                <h3>Room {{ room.number }}</h3>
+                <span class="room-price">S/ {{ room.pricePerNight }}<small> / night</small></span>
+              </div>
+
+              <div class="room-bottom">
+                <span>♙ {{ room.capacity }} guests</span>
+                <div class="room-controls">
+                  <button (click)="openEdit(room)">Edit</button>
+                  <button class="remove-button" (click)="deleteRoom(room)">Delete</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        } @empty {
+          <div class="empty-state">
+            <span>⌂</span>
+            <h3>No rooms found</h3>
+            <p>Try changing your search or add a new room.</p>
+          </div>
+        }
+      </section>
+    }
+
+    <!-- RECYCLE BIN -->
+    @if (activeView === 'trash') {
+      <section class="page-hero">
+        <span class="section-kicker">RECOVERY CENTER</span>
+        <h1>Room <em>archive.</em></h1>
+        <p>Restore rooms that were previously removed.</p>
+        <div class="page-decoration">CN</div>
+      </section>
+
+      <section class="archive-list">
+        @for (room of deletedRooms; track room.roomId) {
+          <article class="archive-item">
+            <div class="archive-icon">⌂</div>
+            <div class="archive-info">
+              <strong>Room {{ room.number }}</strong>
+              <span>{{ room.type }} · S/ {{ room.pricePerNight }} per night</span>
+              <small>Deleted: {{ room.deletedAt }}</small>
+            </div>
+            <button class="button-dark" (click)="restoreRoom(room)">
+              ↶ Restore room
+            </button>
+          </article>
+        } @empty {
+          <div class="empty-state">
+            <span>✳</span>
+            <h3>Nothing here for now.</h3>
+            <p>Your deleted rooms will appear here.</p>
+          </div>
+        }
+      </section>
+    }
+
+    <!-- ACTIVITY -->
+    @if (activeView === 'audit') {
+      <section class="page-hero">
+        <span class="section-kicker">PROPERTY RECORDS</span>
+        <h1>Activity <em>journal.</em></h1>
+        <p>A record of the changes made to your room collection.</p>
+        <div class="page-decoration">CN</div>
+      </section>
+
+      <section class="activity-list">
+        @for (activity of activities; track $index) {
+          <article class="activity-item">
+            <span class="activity-marker">✳</span>
+            <div>
+              <strong>{{ activity.action }} · Room {{ activity.number }}</strong>
+              <small>{{ activity.date }}</small>
+            </div>
+          </article>
+        } @empty {
+          <div class="empty-state">
+            <span>◷</span>
+            <h3>No activity recorded.</h3>
+            <p>Your room management history will appear here.</p>
+          </div>
+        }
+      </section>
+    }
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="brand-mark">CN</span>
+      <div>
+        <strong>CASA NOBLE</strong>
+        <small>HACIENDA & COUNTRY HOUSE</small>
+      </div>
+    </div>
+
+    <p>ROOTED IN NATURE. MADE FOR MEMORIES.</p>
+    <span>© 2026 CASA NOBLE</span>
+  </footer>
+
+  <!-- ROOM FORM MODAL -->
+  @if (showModal) {
+    <div class="modal-backdrop" (click)="closeModal()">
+      <section class="room-modal" (click)="$event.stopPropagation()">
+
+        <button class="modal-close" (click)="closeModal()">×</button>
+
+        <span class="section-kicker">CASA NOBLE · ROOM COLLECTION</span>
+        <h2>{{ editingId ? 'Refine your space.' : 'Welcome a new room.' }}</h2>
+        <p>Complete the details of your countryside room.</p>
+
+        <form (ngSubmit)="saveRoom()">
+          <label>Room number</label>
+          <input name="number"
+                 [(ngModel)]="roomForm.number"
+                 placeholder="Example: 301"
+                 required>
+
+          <label>Room type</label>
+          <select name="type" [(ngModel)]="roomForm.type">
+            <option>Simple</option>
+            <option>Double</option>
+            <option>Suite</option>
+          </select>
+
+          <div class="form-row">
+            <div>
+              <label>Price per night (S/)</label>
+              <input type="number" name="price"
+                     [(ngModel)]="roomForm.pricePerNight"
+                     min="0.01" step="0.01" required>
+            </div>
+            <div>
+              <label>Maximum capacity</label>
+              <input type="number" name="capacity"
+                     [(ngModel)]="roomForm.capacity"
+                     min="1" required>
+            </div>
+          </div>
+
+          <label>Cleaning status</label>
+          <select name="status" [(ngModel)]="roomForm.cleaningStatus">
+            <option>Clean</option>
+            <option>Occupied</option>
+            <option>Maintenance</option>
+          </select>
+
+          <button class="button-dark modal-submit" type="submit">
+            {{ editingId ? 'Save changes' : 'Create room' }} ↗
+          </button>
+        </form>
+
+      </section>
+    </div>
+  }
+
+</div>
